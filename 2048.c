@@ -12,7 +12,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+
 #define SIZE 4
+
 long int score=0;
 
 void drawBoard(int board[SIZE][SIZE])
