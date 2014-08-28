@@ -7,8 +7,11 @@
 # Libraries
 *.lib
 *.a
+<<<<<<< HEAD
 *.la
 *.lo
+=======
+>>>>>>> 4c24aecd2b729817c8494f27844caaec1cb6bfb2
 
 # Shared objects (inc. Windows DLLs)
 *.dll
@@ -22,4 +25,8 @@
 *.app
 *.i*86
 *.x86_64
+<<<<<<< HEAD
 *.hex
+=======
+*.hex
+>>>>>>> 4c24aecd2b729817c8494f27844caaec1cb6bfb2
