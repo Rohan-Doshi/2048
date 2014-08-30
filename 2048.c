@@ -11,10 +11,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <termios.h>
 #include <stdbool.h>
+#include <stdint.h>
 #define SIZE 4
 
 long int score=0;
+
+void setBufferedInput(bool enable)
+{
+	static bool enabled = true;
+	static struct termios old;
+	struct termios new;
+
+	if (enable && !enabled) 
+	{
+		// restore the former settings
+		tcsetattr(STDIN_FILENO,TCSANOW,&old);
+		// set the new state
+		enabled = true;
+	} else if (!enable && enabled) 
+	{
+		// get the terminal settings for standard input
+		tcgetattr(STDIN_FILENO,&new);
+		// we want to keep the old setting to restore them at the end
+		old = new;
+		// disable canonical mode (buffered i/o) and local echo
+		new.c_lflag &=(~ICANON & ~ECHO);
+		// set the new settings immediately
+		tcsetattr(STDIN_FILENO,TCSANOW,&new);
+		// set the new state
+		enabled = false;
+	}
+}
+
 
 void drawBoard(int board[SIZE][SIZE])
 {
@@ -221,6 +252,7 @@ int main() {
 	addRandom(board);
 	addRandom(board);
 	drawBoard(board);
+	setBufferedInput(false);
 	while (true) {
 		c=getchar();
 		switch(c) {
@@ -248,6 +280,7 @@ int main() {
 			}
 		}
 	}
+	setBufferedInput(true);
 	return 0;
 }
 
