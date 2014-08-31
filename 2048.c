@@ -1,13 +1,4 @@
-/*
-- walk over the array from the first to the last number
-  - for each original number in the array that is not zero
-    - look backwards for a target position that does not contain a zero (unless it is position zero)
-      - if the target position does not contain the original number use the next position
-    - if the target position is different from the original position
-      - add the number to the number on the target position
-      - replace the original number by zero
-*/
-#define _XOPEN_SOURCE 500
+//#define _XOPEN_SOURCE 500
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
